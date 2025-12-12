@@ -1,58 +1,53 @@
-document.getElementById("themeBtn").onclick = function() {
-    document.body.classList.toggle("dark-mode");
+document.getElementById("editJobBtn").onclick = () => {
+  const newTitle = prompt("Enter your new job title:");
+  if (newTitle) {
+    document.getElementById("jobTitle").textContent = newTitle;
+  }
 };
 
-document.getElementById("editJobBtn").onclick = function () {
-    let newTitle = prompt("Enter new job title:");
-    if (newTitle) {
-        document.getElementById("jobTitle").textContent = newTitle;
-    }
+document.getElementById("toggleSkillsBtn").onclick = () => {
+  const skills = document.getElementById("skillsSection");
+  if (skills.style.display === "none") {
+    skills.style.display = "block";
+    document.getElementById("toggleSkillsBtn").textContent = "Hide Skills";
+  } else {
+    skills.style.display = "none";
+    document.getElementById("toggleSkillsBtn").textContent = "Show Skills";
+  }
 };
 
-document.getElementById("toggleSkillsBtn").onclick = function () {
-    let skills = document.getElementById("skillsSection");
-
-    if (skills.style.display === "none") {
-        skills.style.display = "block";
-        this.textContent = "Hide Skills";
-    } else {
-        skills.style.display = "none";
-        this.textContent = "Show Skills";
-    }
+const quotes = [
+  "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+  "Don’t watch the clock; do what it does. Keep going.",
+  "The harder you work for something, the greater you’ll feel when you achieve it."
+];
+document.getElementById("quoteBtn").onclick = () => {
+  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+  document.getElementById("quoteDisplay").textContent = randomQuote;
 };
 
-let msg = document.getElementById("msgBox");
-let counter = document.getElementById("counter");
+document.getElementById("themeBtn").onclick = () => {
+  document.body.classList.toggle("dark-mode");
+};
 
-msg.addEventListener("keyup", function () {
-    let remaining = 200 - msg.value.length;
-    counter.textContent = remaining;
+const msgBox = document.getElementById("msgBox");
+const counter = document.getElementById("counter");
+msgBox.addEventListener("input", () => {
+  const remaining = 200 - msgBox.value.length;
+  counter.textContent = remaining;
 });
 
 function validateForm() {
-    let name = document.getElementById("nameField").value;
-    let email = document.getElementById("emailField").value;
+  const name = document.getElementById("nameField").value.trim();
+  const email = document.getElementById("emailField").value.trim();
+  const message = msgBox.value.trim();
 
-    if (name === "" || email === "") {
-        alert("Please fill out Name and Email before sending.");
-        return false;
-    }
-    alert("Form sent successfully!");
-    return true;
+  if (!name || !email || !message) {
+    alert("All fields must be filled out!");
+    return false;
+  }
+  alert("Message sent successfully!");
+  return true;
 }
 
-document.getElementById("dateDisplay").textContent =
-    new Date().toDateString();
-
-const quotes = [
-    "Through Christ all things are possible - Philippians 4:13 ",
-    "I can and I will.",
-    "Take the risk or lose the chance.",
-    "If you want it, work for it.",
-    "The past does not equal the future."
-];
-
-document.getElementById("quoteBtn").onclick = function () {
-    let randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-    document.getElementById("quoteDisplay").textContent = randomQuote;
-};
+document.getElementById("dateDisplay").textContent = new Date().toDateString();
